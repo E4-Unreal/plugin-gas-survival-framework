@@ -24,7 +24,7 @@ void UGSFCharacterMovement::InitializeComponent()
 
 void UGSFCharacterMovement::SetMovementMode(EMovementMode NewMovementMode, uint8 NewCustomMode)
 {
-    if(OwnerAbilitySystem.IsValid())
+    if(MovementMode != NewMovementMode && OwnerAbilitySystem.IsValid())
     {
         // Falling 게임플레이 태그 부착 혹은 제거
         if(NewMovementMode == MOVE_Falling)
