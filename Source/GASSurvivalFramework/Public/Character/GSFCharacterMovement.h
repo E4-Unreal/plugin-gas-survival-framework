@@ -20,13 +20,18 @@ protected:
     TWeakObjectPtr<UAbilitySystemComponent> OwnerAbilitySystem;
 
 public:
+    UGSFCharacterMovement();
+
     /* ActorComponent */
 
     virtual void InitializeComponent() override;
 
     /* CharacterMovementComponent */
 
-    virtual void SetMovementMode(EMovementMode NewMovementMode, uint8 NewCustomMode) override;
+    virtual void SetMovementMode(EMovementMode NewMovementMode, uint8 NewCustomMode = 0) override;
+
+    virtual bool CanAttemptJump() const override;
+    virtual bool DoJump(bool bReplayingMoves) override;
 
     virtual void Crouch(bool bClientSimulation) override;
     virtual void UnCrouch(bool bClientSimulation) override;
