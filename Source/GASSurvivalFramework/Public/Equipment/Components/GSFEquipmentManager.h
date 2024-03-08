@@ -51,7 +51,7 @@ struct FEquipmentSlot
     /* 쿼리 */
 
     bool IsNotValid() const { return !IsValid(); }
-    bool IsValid() const { return SlotTag == FGameplayTag::EmptyTag; }
+    bool IsValid() const { return SlotTag != FGameplayTag::EmptyTag; }
 
     /* 연산자 오버로딩 */
 
@@ -92,6 +92,10 @@ class GASSURVIVALFRAMEWORK_API UGSFEquipmentManager : public UGSFEquipmentManage
 {
     GENERATED_BODY()
 
+    // 선택 장비를 부착할 소켓 이름입니다. 선택 장비는 손에 쥐고 있을 잘비를 의미합니다.
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config", meta = (AllowPrivateAccess = true))
+    FName HandSocketName = "weapon_r";
+
     // 사용 가능한 무기 슬롯 목록입니다.
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config", meta = (AllowPrivateAccess = true))
     TArray<FEquipmentSlotConfig> EquipmentSlotConfigs;
@@ -103,6 +107,9 @@ class GASSURVIVALFRAMEWORK_API UGSFEquipmentManager : public UGSFEquipmentManage
     // 손에 쥐고 있는 무기 슬롯입니다.
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "State", meta = (AllowPrivateAccess = true), Transient)
     FEquipmentSlot SelectedSlot;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "State", meta = (AllowPrivateAccess = true), Transient)
+    TObjectPtr<AGSFEquipmentBase> SelectedEquipment;
 
 public:
 
@@ -128,6 +135,20 @@ public:
 
     UFUNCTION(BlueprintCallable)
     void ClearEquipmentSlot(FGameplayTag Slot, int32 Index);
+
+    // 손에 쥐고 있는 장비 (SelectedEquipment) 가져오기
+    UFUNCTION(BlueprintPure)
+    FORCEINLINE AGSFEquipmentBase* GetSelectedEquipment() const { return SelectedEquipment; }
+
+    // 손에 쥐고 있는 장비를 집어넣습니다. 장비를 제거하는 것이 아닙니다.
+    UFUNCTION(BlueprintCallable)
+    void Deselect();
+
+    UFUNCTION(BlueprintPure)
+    FORCEINLINE bool IsSelectedEquipmentExist() const { return SelectedSlot.IsValid() && SelectedEquipment != nullptr; }
+
+    UFUNCTION(BlueprintCallable)
+    void AttachEquipmentToSocket(AGSFEquipmentBase* Equipment, FName SocketName);
 
     /* Query */
 
