@@ -22,4 +22,8 @@ public:
     // 스켈레탈 메시 소켓에 액터를 부착합니다.
     UFUNCTION(BlueprintCallable, Category = "GASSurvivalFramework")
     static bool AttachActorToSkeletalMeshSocket(AActor* Actor, USkeletalMeshComponent* SkeletalMesh, FName SocketName);
+
+    // 장비 슬롯 태그를 가져옵니다.
+    UFUNCTION(BlueprintCallable, Category = "GASSurvivalFramework|Equipment")
+    static FGameplayTag GetEquipmentSlot(TSubclassOf<AGSFEquipmentBase> WeaponClass);
 };

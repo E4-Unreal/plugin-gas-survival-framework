@@ -12,8 +12,12 @@ class GASSURVIVALFRAMEWORK_API AGSFWeaponBase : public AGSFEquipmentBase
     GENERATED_BODY()
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config", meta = (AllowPrivateAccess = true, Categories = "Equipment.Weapon"))
-    FGameplayTag WeaponTag = GSFGameplayTags::Equipment::WeaponTag;
+    FGameplayTag WeaponType = GSFGameplayTags::Equipment::WeaponTag;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config", meta = (AllowPrivateAccess = true, Categories = "Equipment.Slot"))
+    FGameplayTag WeaponSlot = GSFGameplayTags::Equipment::PrimarySlotTag;
 
 public:
-    virtual FGameplayTag GetEquipmentType() const override { return WeaponTag; };
+    virtual FGameplayTag GetEquipmentType() const override { return WeaponType; }
+    virtual FGameplayTag GetEquipmentSlot() const override { return WeaponSlot; }
 };

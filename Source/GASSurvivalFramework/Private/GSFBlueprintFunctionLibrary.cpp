@@ -3,6 +3,8 @@
 
 #include "GSFBlueprintFunctionLibrary.h"
 
+#include "Equipment/GSFWeaponBase.h"
+
 AActor* UGSFBlueprintFunctionLibrary::SpawnActorOnOwner(TSubclassOf<AActor> ActorClass, AActor* Owner)
 {
     // 월드 가져오기
@@ -36,4 +38,11 @@ bool UGSFBlueprintFunctionLibrary::AttachActorToSkeletalMeshSocket(AActor* Actor
     Actor->AttachToComponent(SkeletalMesh, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), SocketName);
 
     return true;
+}
+
+FGameplayTag UGSFBlueprintFunctionLibrary::GetEquipmentSlot(TSubclassOf<AGSFEquipmentBase> WeaponClass)
+{
+    return WeaponClass == nullptr
+    ? FGameplayTag::EmptyTag
+    : Cast<AGSFWeaponBase>(WeaponClass->ClassDefaultObject)->GetEquipmentSlot();
 }
