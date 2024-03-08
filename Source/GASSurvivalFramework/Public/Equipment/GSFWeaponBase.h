@@ -10,5 +10,10 @@ UCLASS()
 class GASSURVIVALFRAMEWORK_API AGSFWeaponBase : public AGSFEquipmentBase
 {
     GENERATED_BODY()
-    
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config", meta = (AllowPrivateAccess = true, Categories = "Equipment.Weapon"))
+    FGameplayTag WeaponTag = GSFGameplayTags::Equipment::WeaponTag;
+
+public:
+    virtual FGameplayTag GetEquipmentType() const override { return WeaponTag; };
 };

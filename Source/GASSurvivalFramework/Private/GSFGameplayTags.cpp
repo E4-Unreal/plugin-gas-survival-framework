@@ -21,4 +21,18 @@ namespace GSFGameplayTags
         /* 슈터 */
         UE_DEFINE_GAMEPLAY_TAG(ADSTag, "State.ADS") // 조준
     }
+
+    namespace Equipment
+    {
+        /* 장비 슬롯 */
+        UE_DEFINE_GAMEPLAY_TAG(SlotTag, "Equipment.Slot")
+        UE_DEFINE_GAMEPLAY_TAG(PrimarySlotTag, "Equipment.Slot.Primary") // 주 무기 슬롯
+        UE_DEFINE_GAMEPLAY_TAG(SecondarySlotTag, "Equipment.Slot.Secondary") // 보조 무기 슬롯
+        UE_DEFINE_GAMEPLAY_TAG(SpecialSlotTag, "Equipment.Slot.Special") // 특수 슬롯 (아이템, 투척류 등)
+
+        /* 장비 아이템 */
+        UE_DEFINE_GAMEPLAY_TAG(EquipmentTag, "Equipment")
+        UE_DEFINE_GAMEPLAY_TAG(WeaponTag, "Equipment.Weapon")
+        UE_DEFINE_GAMEPLAY_TAG(ArmorTag, "Equipment.Armor")
+    }
 }
