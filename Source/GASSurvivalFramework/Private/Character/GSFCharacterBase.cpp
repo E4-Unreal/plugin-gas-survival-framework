@@ -3,7 +3,7 @@
 
 #include "Character/GSFCharacterBase.h"
 
-#include "Character/GSFCharacterMovement.h"
+#include "Character/Components/GSFCharacterMovement.h"
 
 AGSFCharacterBase::AGSFCharacterBase(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer.SetDefaultSubobjectClass<UGSFCharacterMovement>(CharacterMovementComponentName))
