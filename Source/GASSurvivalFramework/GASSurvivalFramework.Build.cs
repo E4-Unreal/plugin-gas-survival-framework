@@ -29,6 +29,7 @@ public class GASSurvivalFramework : ModuleRules
 			{
                 // 기본
 				"Core",
+                "EnhancedInput",
 
                 // 이펙트
                 "Niagara",
@@ -55,7 +56,7 @@ public class GASSurvivalFramework : ModuleRules
 
                 // 애니메이션
                 "AnimGraphRuntime"
-			}
+            }
 			);
 
 
