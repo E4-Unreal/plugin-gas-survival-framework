@@ -11,7 +11,28 @@
 
 UGSFCharacterMovement::UGSFCharacterMovement()
 {
+    // 앉기 설정
     NavAgentProps.bCanCrouch = true;
+
+    // 일반 설정
+    GravityScale = 1.75f;
+    MaxAcceleration = 1500.f;
+    BrakingFrictionFactor = 1.f;
+    bUseSeparateBrakingFriction = true;
+
+    // 회전 설정
+    bOrientRotationToMovement = true;
+    RotationRate = FRotator(0.0f, 500.0f, 0.0f);
+
+    // 걷기 설정
+    MaxWalkSpeed = 500.f;
+    MinAnalogWalkSpeed = 20.f;
+    BrakingDecelerationWalking = 2000.f;
+
+    // 점프 및 낙하 설정
+    JumpZVelocity = 700.f;
+    AirControl = 0.35f;
+    BrakingDecelerationFalling = 1500.0f;
 }
 
 void UGSFCharacterMovement::InitializeComponent()
