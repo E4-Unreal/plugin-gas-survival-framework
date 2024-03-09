@@ -92,6 +92,10 @@ class GASSURVIVALFRAMEWORK_API UGSFEquipmentManager : public UGSFEquipmentManage
 {
     GENERATED_BODY()
 
+    // 기본적으로 추가될 장비 목록입니다.
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config", meta = (AllowPrivateAccess = true))
+    TArray<TSubclassOf<AGSFEquipmentBase>> DefaultEquipments;
+
     // 선택 장비를 부착할 소켓 이름입니다. 선택 장비는 손에 쥐고 있을 잘비를 의미합니다.
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config", meta = (AllowPrivateAccess = true))
     FName HandSocketName = "weapon_r";
@@ -164,4 +168,7 @@ public:
 private:
     // AvailableSlots로부터 EquipmentSlots를 생성합니다.
     void CreateEquipmentSlots();
+
+    // 기본 장비를 추가합니다.
+    void AddDefaultEquipments();
 };

@@ -13,7 +13,11 @@ void UGSFEquipmentManager::InitializeComponent()
 {
     Super::InitializeComponent();
 
+    // AvailableSlots로부터 EquipmentSlots를 생성합니다.
     CreateEquipmentSlots();
+
+    // 기본 장비를 추가합니다.
+    AddDefaultEquipments();
 }
 
 bool UGSFEquipmentManager::AddEquipment(TSubclassOf<AGSFEquipmentBase> WeaponClass)
@@ -188,5 +192,13 @@ void UGSFEquipmentManager::CreateEquipmentSlots()
 
             EquipmentSlots.Add(EquipmentSlot);
         }
+    }
+}
+
+void UGSFEquipmentManager::AddDefaultEquipments()
+{
+    for (const auto& DefaultEquipment : DefaultEquipments)
+    {
+        AddEquipment(DefaultEquipment);
     }
 }
