@@ -3,12 +3,23 @@
 
 #include "Character/GSFCharacterBase.h"
 
+#include "GEAbilitySystemBase.h"
 #include "Character/Components/GSFCharacterMovement.h"
+#include "Components/CapsuleComponent.h"
+#include "Equipment/Components/GSFEquipmentManager.h"
+
+FName AGSFCharacterBase::AbilitySystemComponentName(TEXT("AbilitySystem"));
+FName AGSFCharacterBase::EquipmentManagerName(TEXT("EquipmentManager"));
 
 AGSFCharacterBase::AGSFCharacterBase(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer.SetDefaultSubobjectClass<UGSFCharacterMovement>(CharacterMovementComponentName))
 {
+    /* 서브 오브젝트 생성 */
+    AbilitySystem = CreateDefaultSubobject<UGEAbilitySystemBase>(AbilitySystemComponentName); // GASExtension 플러그인 사용
+    EquipmentManager = CreateDefaultSubobject<UGSFEquipmentManager>(EquipmentManagerName);
 
+    // 캡슐 컴포넌트 초기화
+    GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 }
 
 bool AGSFCharacterBase::CanJumpInternal_Implementation() const
