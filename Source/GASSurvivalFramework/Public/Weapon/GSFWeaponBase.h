@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GSFEquipmentBase.h"
+#include "Equipment/GSFEquipmentBase.h"
 #include "GSFWeaponBase.generated.h"
 
 UCLASS()

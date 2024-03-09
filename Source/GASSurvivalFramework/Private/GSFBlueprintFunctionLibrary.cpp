@@ -3,7 +3,7 @@
 
 #include "GSFBlueprintFunctionLibrary.h"
 
-#include "Equipment/GSFWeaponBase.h"
+#include "Weapon/GSFWeaponBase.h"
 
 AActor* UGSFBlueprintFunctionLibrary::SpawnActorOnOwner(TSubclassOf<AActor> ActorClass, AActor* Owner)
 {

@@ -5,7 +5,7 @@
 
 #include "GameplayTagContainer.h"
 #include "GSFBlueprintFunctionLibrary.h"
-#include "Equipment/GSFWeaponBase.h"
+#include "Weapon/GSFWeaponBase.h"
 
 const FEquipmentSlot FEquipmentSlot::EmptySlot;
 
