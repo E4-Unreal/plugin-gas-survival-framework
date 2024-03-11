@@ -2,3 +2,8 @@
 
 
 #include "Equipment/GSFEquipmentBase.h"
+
+AGSFEquipmentBase::AGSFEquipmentBase()
+{
+    SetReplicates(true);
+}

@@ -17,6 +17,8 @@ class GASSURVIVALFRAMEWORK_API AGSFEquipmentBase : public AActor
     GENERATED_BODY()
 
 public:
+    AGSFEquipmentBase();
+
     UFUNCTION(BlueprintPure)
     virtual FORCEINLINE FGameplayTag GetEquipmentType() const { return GSFGameplayTags::Equipment::EquipmentTag; }
 
