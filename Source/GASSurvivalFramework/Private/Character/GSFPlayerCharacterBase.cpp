@@ -116,3 +116,25 @@ void AGSFPlayerCharacterBase::OnCrouchActionStarted(const FInputActionValue& Val
     else
         Crouch();
 }
+
+void AGSFPlayerCharacterBase::GetTarget_Implementation(FVector& Target)
+{
+    const UWorld* World = GetWorld();
+    if(World == nullptr) return;
+
+    // 카메라를 기준으로 라인 트레이스를 위한 위치 계산
+    const FTransform& CameraTransform = FollowCamera->GetComponentTransform();
+    const FVector& TraceStart = CameraTransform.GetLocation();
+    const FVector& TraceEnd = TraceStart + 100000.f * FollowCamera->GetForwardVector();
+    FHitResult HitResult;
+
+    // 라인 트레이스
+    World->LineTraceSingleByChannel(
+        HitResult,
+        TraceStart,
+        TraceEnd,
+        ECC_Visibility
+        );
+
+    Target = HitResult.bBlockingHit ? HitResult.Location : TraceEnd;
+}

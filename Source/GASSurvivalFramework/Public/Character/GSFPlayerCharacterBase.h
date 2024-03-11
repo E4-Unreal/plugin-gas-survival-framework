@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Character/GSFCharacterBase.h"
+#include "Weapon/Interface/AimingInterface.h"
 #include "GSFPlayerCharacterBase.generated.h"
 
 class USpringArmComponent;
@@ -16,7 +17,7 @@ struct FInputActionValue;
  * 캐릭터 기본 조작 및 기본 설정이 정의된 기저 클래스입니다.
  */
 UCLASS()
-class GASSURVIVALFRAMEWORK_API AGSFPlayerCharacterBase : public AGSFCharacterBase
+class GASSURVIVALFRAMEWORK_API AGSFPlayerCharacterBase : public AGSFCharacterBase, public IAimingInterface
 {
 	GENERATED_BODY()
 
@@ -85,5 +86,9 @@ public:
 	/* 컴포넌트 Getter */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+public:
+    /* AimingInterface */
+    virtual void GetTarget_Implementation(FVector& Target) override;
 };
 
