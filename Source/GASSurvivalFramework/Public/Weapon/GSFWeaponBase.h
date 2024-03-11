@@ -13,39 +13,33 @@ class GASSURVIVALFRAMEWORK_API AGSFWeaponBase : public AGSFEquipmentBase
 
     /* 레퍼런스 */
 
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Reference", meta = (AllowPrivateAccess = true))
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Reference|Weapon", meta = (AllowPrivateAccess = true))
     TObjectPtr<UAnimInstance> CharacterAnimInstance;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config", meta = (AllowPrivateAccess = true, Categories = "Equipment.Weapon"))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config|Weapon", meta = (AllowPrivateAccess = true, Categories = "Equipment.Weapon"))
     FGameplayTag WeaponType = GSFGameplayTags::Equipment::WeaponTag;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config", meta = (AllowPrivateAccess = true, Categories = "Equipment.Slot"))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config|Weapon", meta = (AllowPrivateAccess = true, Categories = "Equipment.Slot"))
     FGameplayTag WeaponSlot = GSFGameplayTags::Equipment::PrimarySlotTag;
 
 public:
+    /* GSFEquipmentBase */
+
     virtual FGameplayTag GetEquipmentType() const override { return WeaponType; }
     virtual FGameplayTag GetEquipmentSlot() const override { return WeaponSlot; }
 
-    /* Actor */
-
-    virtual void SetOwner(AActor* NewOwner) override;
-    virtual void OnRep_Owner() override;
-
 protected:
     /* 메서드 */
-    UFUNCTION(BlueprintCallable)
-    void PlayMontage(UAnimMontage* Montage);
+    UFUNCTION(BlueprintCallable, Category = "Weapon")
+    void PlayCharacterMontage(UAnimMontage* Montage);
 
-    /* 가상 메서드 */
+    /* GSFEquipmentBase */
 
-    UFUNCTION(BlueprintNativeEvent)
-    void OnEquip();
-
-    UFUNCTION(BlueprintNativeEvent)
-    void OnUnEquip();
+    virtual void OnEquip_Implementation() override;
+    virtual void OnUnEquip_Implementation() override;
 
     /* Getter */
 
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintPure, Category = "Weapon")
     FORCEINLINE UAnimInstance* GetCharacterAnimInstance() const { return CharacterAnimInstance; }
 };

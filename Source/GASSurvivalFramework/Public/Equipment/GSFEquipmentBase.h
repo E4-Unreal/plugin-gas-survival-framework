@@ -19,9 +19,26 @@ class GASSURVIVALFRAMEWORK_API AGSFEquipmentBase : public AActor
 public:
     AGSFEquipmentBase();
 
-    UFUNCTION(BlueprintPure)
+    /* Actor */
+
+    virtual void SetOwner(AActor* NewOwner) override;
+    virtual void OnRep_Owner() override;
+
+protected:
+    /* 가상 메서드 */
+
+    UFUNCTION(BlueprintNativeEvent, Category = "Equipment")
+    void OnEquip();
+
+    UFUNCTION(BlueprintNativeEvent, Category = "Equipment")
+    void OnUnEquip();
+
+public:
+    /* Getter */
+
+    UFUNCTION(BlueprintPure, Category = "Equipment")
     virtual FORCEINLINE FGameplayTag GetEquipmentType() const { return GSFGameplayTags::Equipment::EquipmentTag; }
 
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintPure, Category = "Equipment")
     virtual FORCEINLINE FGameplayTag GetEquipmentSlot() const { return GSFGameplayTags::Equipment::SlotTag; }
 };
