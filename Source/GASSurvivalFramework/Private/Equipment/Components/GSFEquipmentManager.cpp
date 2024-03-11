@@ -5,6 +5,7 @@
 
 #include "GameplayTagContainer.h"
 #include "GSFBlueprintFunctionLibrary.h"
+#include "Net/UnrealNetwork.h"
 #include "Weapon/GSFWeaponBase.h"
 
 const FEquipmentSlot FEquipmentSlot::EmptySlot;
@@ -18,6 +19,13 @@ void UGSFEquipmentManager::InitializeComponent()
 
     // 기본 장비를 추가합니다.
     AddDefaultEquipments();
+}
+
+void UGSFEquipmentManager::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+    DOREPLIFETIME(ThisClass, SelectedEquipment);
 }
 
 bool UGSFEquipmentManager::AddEquipment(TSubclassOf<AGSFEquipmentBase> WeaponClass)
@@ -134,7 +142,7 @@ bool UGSFEquipmentManager::CanAddEquipment(TSubclassOf<AGSFEquipmentBase> Weapon
 {
     // 무기 슬롯이 비어있는지 확인
     const FGameplayTag& EquipmentSlot = UGSFBlueprintFunctionLibrary::GetEquipmentSlot(WeaponClass);
-    return WeaponClass != nullptr && IsSlotAvailable(EquipmentSlot);
+    return WeaponClass != nullptr && IsSlotAvailable(EquipmentSlot) && GetOwner()->HasAuthority();
 }
 
 bool UGSFEquipmentManager::IsSlotAvailable(const FGameplayTag& WeaponSlot) const
@@ -201,4 +209,11 @@ void UGSFEquipmentManager::AddDefaultEquipments()
     {
         AddEquipment(DefaultEquipment);
     }
+}
+
+void UGSFEquipmentManager::OnRep_SelectedEquipment(AGSFEquipmentBase* OldEquipment)
+{
+    // TODO Deactivate OldEquipment
+
+    // TODO Activate NewEquipment
 }

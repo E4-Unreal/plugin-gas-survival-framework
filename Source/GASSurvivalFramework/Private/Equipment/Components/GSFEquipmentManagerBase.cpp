@@ -6,6 +6,7 @@
 UGSFEquipmentManagerBase::UGSFEquipmentManagerBase()
 {
     bWantsInitializeComponent = true;
+    SetIsReplicated(true);
 }
 
 void UGSFEquipmentManagerBase::InitializeComponent()

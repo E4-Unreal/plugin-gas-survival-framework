@@ -85,8 +85,6 @@ struct FEquipmentSlot
     }
 };
 
-// TODO 무기 선택 기능 구현, 선택 가능 장비 슬롯 (게임플레이 태그) 설정, 손 슬롯 설정
-
 UCLASS(ClassGroup=(GASSurvivalFramework), meta=(BlueprintSpawnableComponent))
 class GASSURVIVALFRAMEWORK_API UGSFEquipmentManager : public UGSFEquipmentManagerBase
 {
@@ -112,12 +110,14 @@ class GASSURVIVALFRAMEWORK_API UGSFEquipmentManager : public UGSFEquipmentManage
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "State", meta = (AllowPrivateAccess = true), Transient)
     FEquipmentSlot SelectedSlot;
 
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "State", meta = (AllowPrivateAccess = true), Transient)
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "State", meta = (AllowPrivateAccess = true), Transient, ReplicatedUsing = OnRep_SelectedEquipment)
     TObjectPtr<AGSFEquipmentBase> SelectedEquipment;
 
 public:
 
     virtual void InitializeComponent() override;
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
     UFUNCTION(BlueprintCallable)
     bool AddEquipment(TSubclassOf<AGSFEquipmentBase> WeaponClass);
@@ -171,4 +171,9 @@ private:
 
     // 기본 장비를 추가합니다.
     void AddDefaultEquipments();
+
+    /* 리플리케이트 */
+
+    UFUNCTION()
+    void OnRep_SelectedEquipment(AGSFEquipmentBase* OldEquipment);
 };
