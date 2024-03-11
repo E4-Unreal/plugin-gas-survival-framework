@@ -6,6 +6,7 @@
 #include "GSFFireArm.h"
 #include "GSFHitScanFireArm.generated.h"
 
+class UGSFHitEffectDefinition;
 class UGameplayEffect;
 
 UCLASS()
@@ -21,9 +22,9 @@ class GASSURVIVALFRAMEWORK_API AGSFHitScanFireArm : public AGSFFireArm
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config|HitScan", meta = (AllowPrivateAccess = true))
     float MaxDistance = 100000.f;
 
-    // TODO 임시
+    // 피격 효과
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config|HitScan", meta = (AllowPrivateAccess = true))
-    UParticleSystem* HitEffect;
+    UGSFHitEffectDefinition* HitEffect;
 
 protected:
     virtual void OnFire_Implementation() override;

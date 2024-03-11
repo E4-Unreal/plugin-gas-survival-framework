@@ -33,6 +33,7 @@ public class GASSurvivalFramework : ModuleRules
 
                 // 이펙트
                 "Niagara",
+                "PhysicsCore",
 
                 // GAS
                 "GameplayAbilities",

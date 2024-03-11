@@ -5,6 +5,7 @@
 
 #include "FunctionLibraries/GEFunctionLibrary.h"
 #include "Kismet/GameplayStatics.h"
+#include "Weapon/GSFHitEffectDefinition.h"
 #include "Weapon/Interface/AimingInterface.h"
 
 void AGSFHitScanFireArm::OnFire_Implementation()
@@ -31,6 +32,7 @@ void AGSFHitScanFireArm::OnFire_Implementation()
         FCollisionQueryParams CollisionQueryParams;
         CollisionQueryParams.AddIgnoredActor(this);
         CollisionQueryParams.AddIgnoredActor(GetOwner());
+        CollisionQueryParams.bReturnPhysicalMaterial = true;
 
         // 라인 트레이스 실행
         FHitResult HitResult;
@@ -61,13 +63,5 @@ void AGSFHitScanFireArm::OnHit(const FHitResult& HitResult)
 
 void AGSFHitScanFireArm::OnMulticastHit_Implementation(const FHitResult& HitResult)
 {
-    UGameplayStatics::SpawnEmitterAttached(
-            HitEffect,
-            HitResult.GetComponent(),
-            NAME_None,
-            HitResult.ImpactPoint,
-            HitResult.ImpactNormal.ToOrientationRotator(),
-            EAttachLocation::Type::KeepWorldPosition,
-            true
-            );
+    HitEffect->SpawnHitEffect(HitResult);
 }
