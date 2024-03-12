@@ -31,6 +31,9 @@ void UGSFAnimInstanceBase::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 	// 유효성 검사
 	if(!Character.IsValid() || !CharacterMovement.IsValid()) return;
 
+    // 죽은 상태에서는 업데이트 중지
+    if(bDead) return;
+
 	/* CharacterMovement */
 
 	// 속도
