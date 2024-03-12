@@ -20,6 +20,15 @@ namespace GSFGameplayTags
 
         /* 슈터 */
         UE_DEFINE_GAMEPLAY_TAG(ADSTag, "State.ADS") // 조준
+
+        /* 전투 */
+        UE_DEFINE_GAMEPLAY_TAG(CombatTag, "State.Combat") // 전투
+    }
+
+    namespace Action
+    {
+        /* 공격 */
+        UE_DEFINE_GAMEPLAY_TAG(AttackTag, "Action.Attack") // 공격
     }
 
     namespace Equipment

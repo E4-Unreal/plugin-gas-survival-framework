@@ -22,6 +22,15 @@ namespace GSFGameplayTags
 
         /* 슈터 */
         UE_DECLARE_GAMEPLAY_TAG_EXTERN(ADSTag)
+
+        /* 전투 */
+        UE_DECLARE_GAMEPLAY_TAG_EXTERN(CombatTag)
+    }
+
+    namespace Action
+    {
+        /* 공격 */
+        UE_DECLARE_GAMEPLAY_TAG_EXTERN(AttackTag)
     }
 
     namespace Equipment

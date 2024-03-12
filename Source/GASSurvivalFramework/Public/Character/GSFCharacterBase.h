@@ -16,6 +16,7 @@
  * GASExtension 플러그인의 AbilitySystem이 부착되어 있습니다.
  */
 
+class UGEStateMachine;
 class UGSFEquipmentManager;
 class UAbilitySystemComponent;
 
@@ -31,6 +32,9 @@ public:
     /* EquipmentManager의 이름으로 다른 클래스로 교체할 때 사용합니다. */
     static FName EquipmentManagerName;
 
+    /* StateMachine의 이름으로 다른 클래스로 교체할 때 사용합니다. */
+    static FName StateMachineName;
+
 private:
     // GAS를 사용하기 위한 ASC입니다.
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component", meta = (AllowPrivateAccess = "true"))
@@ -39,6 +43,10 @@ private:
     // 장비를 관리하기 위한 컴포넌트입니다.
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component", meta = (AllowPrivateAccess = "true"))
     TObjectPtr<UGSFEquipmentManager> EquipmentManager;
+
+    // 캐릭터 상태를 관리하기 위한 컴포넌트입니다.
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component", meta = (AllowPrivateAccess = "true"))
+    TObjectPtr<UGEStateMachine> StateMachine;
 
 public:
     AGSFCharacterBase(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
