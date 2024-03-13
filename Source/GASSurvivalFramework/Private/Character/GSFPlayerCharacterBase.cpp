@@ -34,24 +34,13 @@ void AGSFPlayerCharacterBase::BeginPlay()
 	Super::BeginPlay();
 
 	// 입력 매핑 컨텍스트 추가
-	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
-	{
-		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
-		{
-			Subsystem->AddMappingContext(DefaultMappingContext, 0);
-		}
-	}
-}
-
-void AGSFPlayerCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-    Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-    SetupEnhancedInputComponent(Cast<UEnhancedInputComponent>(PlayerInputComponent));
+    AddMappingContext(DefaultMappingContext);
 }
 
 void AGSFPlayerCharacterBase::SetupEnhancedInputComponent(UEnhancedInputComponent* EnhancedInputComponent)
 {
+    Super::SetupEnhancedInputComponent(EnhancedInputComponent);
+
     // null 검사
     if(EnhancedInputComponent == nullptr) return;
 

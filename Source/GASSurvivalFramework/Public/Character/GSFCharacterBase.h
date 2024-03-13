@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "Character/GEPlayerCharacterBase.h"
 #include "GSFCharacterBase.generated.h"
 
 /**
@@ -18,35 +18,21 @@
 
 class UGEStateMachine;
 class UGSFEquipmentManager;
-class UAbilitySystemComponent;
+class UGEAbilitySystemBase;
 
 UCLASS()
-class GASSURVIVALFRAMEWORK_API AGSFCharacterBase : public ACharacter
+class GASSURVIVALFRAMEWORK_API AGSFCharacterBase : public AGEPlayerCharacterBase
 {
     GENERATED_BODY()
 
 public:
-    /* AbilitySystem Component의 이름으로 다른 클래스로 교체할 때 사용합니다. */
-    static FName AbilitySystemComponentName;
-
     /* EquipmentManager의 이름으로 다른 클래스로 교체할 때 사용합니다. */
     static FName EquipmentManagerName;
 
-    /* StateMachine의 이름으로 다른 클래스로 교체할 때 사용합니다. */
-    static FName StateMachineName;
-
 private:
-    // GAS를 사용하기 위한 ASC입니다.
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component", meta = (AllowPrivateAccess = "true"))
-    TObjectPtr<UAbilitySystemComponent> AbilitySystem;
-
     // 장비를 관리하기 위한 컴포넌트입니다.
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component", meta = (AllowPrivateAccess = "true"))
     TObjectPtr<UGSFEquipmentManager> EquipmentManager;
-
-    // 캐릭터 상태를 관리하기 위한 컴포넌트입니다.
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component", meta = (AllowPrivateAccess = "true"))
-    TObjectPtr<UGEStateMachine> StateMachine;
 
     // GetBaseAimRotation에서 사용하기 위한 리플리케이트된 Yaw
     UPROPERTY(Replicated)

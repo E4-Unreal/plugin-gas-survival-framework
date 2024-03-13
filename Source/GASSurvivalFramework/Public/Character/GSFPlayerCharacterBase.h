@@ -62,16 +62,13 @@ public:
 	AGSFPlayerCharacterBase(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
 protected:
-    /* Pawn */
-    virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+    /* GEPlayerCharacterBase */
+    virtual void SetupEnhancedInputComponent(UEnhancedInputComponent* EnhancedInputComponent) override;
 
     /* Actor */
     virtual void BeginPlay() override;
 
     /* 메서드 */
-
-    // 향상된 입력 컴포넌트 설정
-    virtual void SetupEnhancedInputComponent(UEnhancedInputComponent* EnhancedInputComponent);
 
 	// 캐릭터 이동
 	virtual void Move(const FInputActionValue& Value);
