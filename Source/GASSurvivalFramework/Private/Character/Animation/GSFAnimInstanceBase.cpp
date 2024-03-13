@@ -43,7 +43,7 @@ void UGSFAnimInstanceBase::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 	Direction = UKismetAnimationLibrary::CalculateDirection(Velocity, Character->GetActorRotation());
 
 	// 에임 오프셋
-	const FRotator TargetRotator = (Character->GetControlRotation() - Character->GetActorRotation()).GetNormalized();
+	const FRotator TargetRotator = (Character->GetBaseAimRotation() - Character->GetActorRotation()).GetNormalized();
 	const FRotator CurrentRotator = FRotator(AimPitch, AimYaw, 0.f);
 	const FRotator DesiredRotator = FMath::RInterpTo(CurrentRotator, TargetRotator, DeltaSeconds, InterpSpeed);
 

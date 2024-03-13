@@ -48,10 +48,23 @@ private:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component", meta = (AllowPrivateAccess = "true"))
     TObjectPtr<UGEStateMachine> StateMachine;
 
+    // GetBaseAimRotation에서 사용하기 위한 리플리케이트된 Yaw
+    UPROPERTY(Replicated)
+    uint8 RemoteViewYaw;
+
 public:
     AGSFCharacterBase(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+    virtual void PreReplication(IRepChangedPropertyTracker& ChangedPropertyTracker) override;
+
+    virtual FRotator GetBaseAimRotation() const override;
 
 protected:
     virtual bool CanJumpInternal_Implementation() const override;
     virtual bool CanCrouch() const override;
+
+private:
+    void SetRemoteViewYaw(float NewRemoteViewYaw);
 };
