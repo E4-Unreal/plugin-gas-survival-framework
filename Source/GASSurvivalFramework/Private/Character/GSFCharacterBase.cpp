@@ -7,7 +7,6 @@
 #include "Character/Components/GSFCharacterMovement.h"
 #include "Character/Components/GSFStateMachine.h"
 #include "Components/CapsuleComponent.h"
-#include "Engine/DemoNetDriver.h"
 #include "Equipment/Components/GSFEquipmentManager.h"
 #include "Net/UnrealNetwork.h"
 
@@ -25,6 +24,9 @@ AGSFCharacterBase::AGSFCharacterBase(const FObjectInitializer& ObjectInitializer
 
     // 캡슐 컴포넌트 초기화
     GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
+
+    // 호스트 플레이어가 없는 경우(렌더링되지 않는 경우)에도 스켈레탈 메시의 위차가 정확히 반영되기 위한 설정
+    GetMesh()->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
 }
 
 void AGSFCharacterBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
