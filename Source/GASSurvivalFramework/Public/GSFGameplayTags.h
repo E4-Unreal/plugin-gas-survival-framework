@@ -27,6 +27,12 @@ namespace GSFGameplayTags
         UE_DECLARE_GAMEPLAY_TAG_EXTERN(CombatTag)
     }
 
+    namespace Input
+    {
+        UE_DECLARE_GAMEPLAY_TAG_EXTERN(PrimaryTag)
+        UE_DECLARE_GAMEPLAY_TAG_EXTERN(SecondaryTag)
+    }
+
     namespace Action
     {
         /* 공격 */

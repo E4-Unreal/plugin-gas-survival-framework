@@ -25,6 +25,12 @@ namespace GSFGameplayTags
         UE_DEFINE_GAMEPLAY_TAG(CombatTag, "State.Combat") // 전투
     }
 
+    namespace Input
+    {
+        UE_DEFINE_GAMEPLAY_TAG(PrimaryTag, "Input.Primary")
+        UE_DEFINE_GAMEPLAY_TAG(SecondaryTag, "Input.Secondary")
+    }
+
     namespace Action
     {
         /* 공격 */
