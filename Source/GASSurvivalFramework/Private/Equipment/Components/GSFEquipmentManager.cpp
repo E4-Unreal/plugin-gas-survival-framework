@@ -85,6 +85,12 @@ void UGSFEquipmentManager::SelectEquipment(FGameplayTag Slot, int32 Index)
     SelectedSlot = EquipmentSlot;
     SelectedEquipment = GetEquipment(SelectedSlot.SlotTag, SelectedSlot.Index);
     AttachEquipmentToSocket(SelectedEquipment, HandSocketName);
+
+    // 선택 장비를 활성화합니다.
+    if(AGSFWeaponBase* Weapon = Cast<AGSFWeaponBase>(SelectedEquipment))
+    {
+        Weapon->OnSelected_Implementation();
+    }
 }
 
 bool UGSFEquipmentManager::IsEquipmentExist(FGameplayTag Slot, int32 Index) const
@@ -114,6 +120,13 @@ void UGSFEquipmentManager::ClearEquipmentSlot(FGameplayTag Slot, int32 Index)
 void UGSFEquipmentManager::Deselect()
 {
     // TODO 자연스러운 연출을 위해 나중에 애님 노티파이에서 호출하도록 해야합니다. bool 값으로 즉시 자동으로 호출될지 정할 것 같습니다.
+
+    // 기존 선택 무기를 비활성화합니다
+    // 선택 장비를 활성화합니다.
+    if(AGSFWeaponBase* Weapon = Cast<AGSFWeaponBase>(SelectedEquipment))
+    {
+        Weapon->OnDeselected_Implementation();
+    }
 
     // 손 대신 장비 슬롯에 부착합니다.
     AttachEquipmentToSocket(SelectedEquipment, SelectedSlot.SocketName);

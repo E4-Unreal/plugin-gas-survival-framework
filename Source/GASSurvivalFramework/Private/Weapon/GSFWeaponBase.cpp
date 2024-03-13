@@ -3,25 +3,53 @@
 
 #include "Weapon/GSFWeaponBase.h"
 
-#include "GameFramework/Character.h"
+#include "AbilitySystemComponent.h"
+#include "AbilitySystemGlobals.h"
+#include "FunctionLibraries/GEFunctionLibrary.h"
 
-void AGSFWeaponBase::PlayCharacterMontage(UAnimMontage* Montage)
+void AGSFWeaponBase::OnSelected_Implementation()
 {
-    if(CharacterAnimInstance)
-        CharacterAnimInstance->Montage_Play(Montage);
+    GiveAbilities();
+}
+
+void AGSFWeaponBase::OnDeselected_Implementation()
+{
+    ClearAbilities();
+}
+
+void AGSFWeaponBase::GiveAbilities()
+{
+    // 유효성 검사
+    if(!OwnerAbilitySystem.IsValid()) return;
+
+    // 무기 어빌리티 부여
+    AbilitySpecHandles = UGEFunctionLibrary::GiveAbilitiesToSystem(WeaponAbilities, OwnerAbilitySystem.Get());
+}
+
+void AGSFWeaponBase::ClearAbilities()
+{
+    // 유효성 검사
+    if(!OwnerAbilitySystem.IsValid()) return;
+
+    // 무기 어빌리티 제거
+    for (const auto& AbilitySpecHandle : AbilitySpecHandles)
+    {
+        OwnerAbilitySystem->ClearAbility(AbilitySpecHandle);
+    }
 }
 
 void AGSFWeaponBase::OnEquip_Implementation()
 {
     Super::OnEquip_Implementation();
 
-    const ACharacter* Character = Cast<ACharacter>(GetOwner());
-    CharacterAnimInstance = Character == nullptr ? nullptr : Character->GetMesh()->GetAnimInstance();
+    // AbilitySystem 캐싱
+    OwnerAbilitySystem = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(GetOwner());
 }
 
 void AGSFWeaponBase::OnUnEquip_Implementation()
 {
     Super::OnUnEquip_Implementation();
 
-    CharacterAnimInstance = nullptr;
+    // AbilitySystem 캐시 제거
+    OwnerAbilitySystem = nullptr;
 }

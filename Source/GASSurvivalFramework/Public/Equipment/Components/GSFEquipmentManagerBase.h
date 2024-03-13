@@ -7,7 +7,7 @@
 #include "GSFEquipmentManagerBase.generated.h"
 
 
-UCLASS(Abstract)
+UCLASS(Abstract, NotBlueprintable)
 class GASSURVIVALFRAMEWORK_API UGSFEquipmentManagerBase : public UActorComponent
 {
     GENERATED_BODY()
