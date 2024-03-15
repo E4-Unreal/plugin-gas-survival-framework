@@ -8,6 +8,7 @@
 
 class USoundCue;
 class UFXSystemAsset;
+class UMaterialInterface;
 
 USTRUCT(Atomic, BlueprintType)
 struct FGSFSoundConfig
@@ -40,6 +41,40 @@ struct FGSFVisualConfig
 };
 
 USTRUCT(Atomic, BlueprintType)
+struct FGSFDecalConfig
+{
+    GENERATED_BODY()
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    UMaterialInterface* DecalMaterial;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float MaxSize = 100.f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float MinSize = 10.f;
+
+    // 투영 거리
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float Depth = 10.f;
+};
+
+USTRUCT(Atomic, BlueprintType)
+struct FGSFSplatterDecalConfig
+{
+    GENERATED_BODY()
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    FGSFDecalConfig DecalConfig;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    bool bUseSplatter = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float SplatterDistance = 300.f;
+};
+
+USTRUCT(Atomic, BlueprintType)
 struct FGSFHitEffectConfig
 {
     GENERATED_BODY()
@@ -49,6 +84,14 @@ struct FGSFHitEffectConfig
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FGSFSoundConfig SoundEffect;
+
+    // 피격 대상에 직접 스폰할 데칼
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    FGSFDecalConfig Decal;
+
+    // 피격 대상 뒤쪽에 스폰할 데칼 (관통)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    FGSFSplatterDecalConfig SplatterDecal;
 };
 
 /*
@@ -81,4 +124,10 @@ private:
 
     // VFX 스폰
     void SpawnSystem(const FGSFVisualConfig& VisualConfig, const FHitResult& HitResult);
+
+    // 데칼 스폰
+    void SpawnDecal(const FGSFDecalConfig& DecalConfig, const FHitResult& HitResult);
+
+    // 피격 대상 뒤쪽에 데칼 스폰
+    void SpawnSplatterDecal(const FGSFSplatterDecalConfig& SplatterDecalConfig, const FHitResult& HitResult);
 };
