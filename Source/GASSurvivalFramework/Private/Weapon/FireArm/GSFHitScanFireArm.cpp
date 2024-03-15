@@ -49,7 +49,7 @@ void AGSFHitScanFireArm::OnFire_Implementation()
     }
 }
 
-void AGSFHitScanFireArm::OnHit(const FHitResult& HitResult)
+void AGSFHitScanFireArm::OnHit_Implementation(const FHitResult& HitResult)
 {
     // 서버에서만 실행 가능합니다.
     if(!HasAuthority()) return;

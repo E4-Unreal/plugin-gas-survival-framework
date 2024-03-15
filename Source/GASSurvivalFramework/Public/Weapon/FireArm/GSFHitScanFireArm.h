@@ -29,7 +29,8 @@ class GASSURVIVALFRAMEWORK_API AGSFHitScanFireArm : public AGSFFireArm
 protected:
     virtual void OnFire_Implementation() override;
 
-    virtual void OnHit(const FHitResult& HitResult);
+    UFUNCTION(BlueprintNativeEvent)
+    void OnHit(const FHitResult& HitResult);
 
     UFUNCTION(NetMulticast, Reliable)
     void OnMulticastHit(const FHitResult& HitResult);
