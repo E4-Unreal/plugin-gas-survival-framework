@@ -4,8 +4,7 @@
 #include "Weapon/FireArm/GSFHitScanFireArm.h"
 
 #include "FunctionLibraries/GEFunctionLibrary.h"
-#include "Kismet/GameplayStatics.h"
-#include "Weapon/GSFHitEffectDefinition.h"
+#include "Weapon/HitEffect/GSFHitEffectDefinition.h"
 #include "Weapon/Interface/AimingInterface.h"
 
 void AGSFHitScanFireArm::OnFire_Implementation()
