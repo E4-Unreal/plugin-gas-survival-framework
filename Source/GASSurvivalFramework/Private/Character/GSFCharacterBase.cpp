@@ -3,7 +3,6 @@
 
 #include "Character/GSFCharacterBase.h"
 
-#include "Character/Components/GSFCharacterMovement.h"
 #include "Character/Components/GSFStateMachine.h"
 #include "Components/CapsuleComponent.h"
 #include "Equipment/Components/GSFEquipmentManager.h"
@@ -12,10 +11,7 @@
 FName AGSFCharacterBase::EquipmentManagerName(TEXT("EquipmentManager"));
 
 AGSFCharacterBase::AGSFCharacterBase(const FObjectInitializer& ObjectInitializer)
-    : Super(ObjectInitializer.
-        SetDefaultSubobjectClass<UGSFCharacterMovement>(CharacterMovementComponentName)
-        .SetDefaultSubobjectClass<UGSFStateMachine>(StateMachineName)
-        )
+: Super(ObjectInitializer.SetDefaultSubobjectClass<UGSFStateMachine>(StateMachineName))
 {
     /* 서브 오브젝트 생성 */
     EquipmentManager = CreateDefaultSubobject<UGSFEquipmentManager>(EquipmentManagerName);
@@ -56,18 +52,6 @@ FRotator AGSFCharacterBase::GetBaseAimRotation() const
     }
 
     return BaseAimRotation;
-}
-
-bool AGSFCharacterBase::CanJumpInternal_Implementation() const
-{
-    // 앉은 상태에서도 점프가 가능합니다.
-    return JumpIsAllowedInternal();
-}
-
-bool AGSFCharacterBase::CanCrouch() const
-{
-    // 점프 상태에서는 앉기가 불가능합니다.
-    return !GetCharacterMovement()->IsFalling() && Super::CanCrouch();
 }
 
 void AGSFCharacterBase::SetRemoteViewYaw(float NewRemoteViewYaw)

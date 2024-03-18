@@ -38,10 +38,6 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UCameraComponent> FollowCamera;
 
-	/** MappingContext */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UInputMappingContext> DefaultMappingContext;
-
 	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UInputAction> JumpAction;
@@ -64,9 +60,6 @@ public:
 protected:
     /* GEPlayerCharacterBase */
     virtual void SetupEnhancedInputComponent(UEnhancedInputComponent* EnhancedInputComponent) override;
-
-    /* Actor */
-    virtual void BeginPlay() override;
 
     /* 메서드 */
 

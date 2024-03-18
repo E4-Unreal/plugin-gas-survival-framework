@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Character/GEPlayerCharacterBase.h"
+#include "Character/GECharacterBase.h"
 #include "GSFCharacterBase.generated.h"
 
 /**
@@ -21,7 +21,7 @@ class UGSFEquipmentManager;
 class UGEAbilitySystemBase;
 
 UCLASS()
-class GASSURVIVALFRAMEWORK_API AGSFCharacterBase : public AGEPlayerCharacterBase
+class GASSURVIVALFRAMEWORK_API AGSFCharacterBase : public AGECharacterBase
 {
     GENERATED_BODY()
 
@@ -46,10 +46,6 @@ public:
     virtual void PreReplication(IRepChangedPropertyTracker& ChangedPropertyTracker) override;
 
     virtual FRotator GetBaseAimRotation() const override;
-
-protected:
-    virtual bool CanJumpInternal_Implementation() const override;
-    virtual bool CanCrouch() const override;
 
 private:
     void SetRemoteViewYaw(float NewRemoteViewYaw);

@@ -29,14 +29,6 @@ AGSFPlayerCharacterBase::AGSFPlayerCharacterBase(const FObjectInitializer& Objec
     FollowCamera->bUsePawnControlRotation = false;
 }
 
-void AGSFPlayerCharacterBase::BeginPlay()
-{
-	Super::BeginPlay();
-
-	// 입력 매핑 컨텍스트 추가
-    AddMappingContext(DefaultMappingContext);
-}
-
 void AGSFPlayerCharacterBase::SetupEnhancedInputComponent(UEnhancedInputComponent* EnhancedInputComponent)
 {
     Super::SetupEnhancedInputComponent(EnhancedInputComponent);
