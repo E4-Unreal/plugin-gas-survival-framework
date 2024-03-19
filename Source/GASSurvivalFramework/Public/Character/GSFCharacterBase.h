@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Character/GECharacterBase.h"
+#include "Character/GECharacter.h"
 #include "GSFCharacterBase.generated.h"
 
 /**
@@ -16,23 +16,10 @@
  * GASExtension 플러그인의 AbilitySystem이 부착되어 있습니다.
  */
 
-class UGEStateMachine;
-class UGEEquipmentManager;
-class UGEAbilitySystemBase;
-
 UCLASS()
-class GASSURVIVALFRAMEWORK_API AGSFCharacterBase : public AGECharacterBase
+class GASSURVIVALFRAMEWORK_API AGSFCharacterBase : public AGECharacter
 {
     GENERATED_BODY()
-
-public:
-    /* EquipmentManager의 이름으로 다른 클래스로 교체할 때 사용합니다. */
-    static FName EquipmentManagerName;
-
-private:
-    // 장비를 관리하기 위한 컴포넌트입니다.
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component", meta = (AllowPrivateAccess = "true"))
-    TObjectPtr<UGEEquipmentManager> EquipmentManager;
 
     // GetBaseAimRotation에서 사용하기 위한 리플리케이트된 Yaw
     UPROPERTY(Replicated)

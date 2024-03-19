@@ -9,8 +9,6 @@
 
 class USpringArmComponent;
 class UCameraComponent;
-class UInputMappingContext;
-class UInputAction;
 struct FInputActionValue;
 
 /**
@@ -38,39 +36,8 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UCameraComponent> FollowCamera;
 
-	/** Jump Input Action */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UInputAction> JumpAction;
-
-	/** Move Input Action */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UInputAction> MoveAction;
-
-	/** Look Input Action */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UInputAction> LookAction;
-
-    /** Crouch Input Action */
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-    TObjectPtr<UInputAction> CrouchAction;
-
 public:
 	AGSFPlayerCharacterBase(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
-
-protected:
-    /* GEPlayerCharacterBase */
-    virtual void SetupEnhancedInputComponent(UEnhancedInputComponent* EnhancedInputComponent) override;
-
-    /* 메서드 */
-
-	// 캐릭터 이동
-	virtual void Move(const FInputActionValue& Value);
-
-	// 컨트롤러 회전
-	virtual void Look(const FInputActionValue& Value);
-
-    // 앉기 입력 이벤트 핸들링
-    void OnCrouchActionStarted(const FInputActionValue& Value);
 
 public:
 	/* 컴포넌트 Getter */
