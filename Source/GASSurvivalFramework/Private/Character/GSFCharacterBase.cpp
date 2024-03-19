@@ -4,7 +4,7 @@
 #include "Character/GSFCharacterBase.h"
 
 #include "Components/CapsuleComponent.h"
-#include "Equipment/Components/GSFEquipmentManager.h"
+#include "Equipment/Components/GEEquipmentManager.h"
 #include "Net/UnrealNetwork.h"
 
 FName AGSFCharacterBase::EquipmentManagerName(TEXT("EquipmentManager"));
@@ -12,7 +12,7 @@ FName AGSFCharacterBase::EquipmentManagerName(TEXT("EquipmentManager"));
 AGSFCharacterBase::AGSFCharacterBase(const FObjectInitializer& ObjectInitializer)
 {
     /* 서브 오브젝트 생성 */
-    EquipmentManager = CreateDefaultSubobject<UGSFEquipmentManager>(EquipmentManagerName);
+    EquipmentManager = CreateDefaultSubobject<UGEEquipmentManager>(EquipmentManagerName);
 
     // 캡슐 컴포넌트 초기화
     GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);

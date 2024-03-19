@@ -42,9 +42,6 @@ class GASSURVIVALFRAMEWORK_API UGSFAnimInstanceBase : public UGEAnimInstance
     bool bADS;
 
     UPROPERTY(BlueprintReadOnly, Category = "State|Character", meta = (AllowPrivateAccess = true))
-    bool bCombat;
-
-    UPROPERTY(BlueprintReadOnly, Category = "State|Character", meta = (AllowPrivateAccess = true))
     bool bDead;
 
 	UPROPERTY(BlueprintReadOnly, Category = "State|AimOffset", meta = (AllowPrivateAccess = true))

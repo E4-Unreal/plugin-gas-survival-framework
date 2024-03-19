@@ -3,18 +3,17 @@
 
 #include "Character/Animation/GSFAnimInstanceBase.h"
 
-#include "GSFGameplayTags.h"
+#include "GEGameplayTags.h"
 #include "KismetAnimationLibrary.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 UGSFAnimInstanceBase::UGSFAnimInstanceBase()
 {
-    TagsToRegister.AddTagFast(GSFGameplayTags::State::FallingTag);
-    TagsToRegister.AddTagFast(GSFGameplayTags::State::CrouchingTag);
-    TagsToRegister.AddTagFast(GSFGameplayTags::State::ADSTag);
-    TagsToRegister.AddTagFast(GSFGameplayTags::State::DeadTag);
-    TagsToRegister.AddTagFast(GSFGameplayTags::State::CombatTag);
+    TagsToRegister.AddTagFast(GEGameplayTags::State::FallingTag);
+    TagsToRegister.AddTagFast(GEGameplayTags::State::CrouchingTag);
+    TagsToRegister.AddTagFast(GEGameplayTags::State::ADSTag);
+    TagsToRegister.AddTagFast(GEGameplayTags::State::DeadTag);
 }
 
 void UGSFAnimInstanceBase::NativeInitializeAnimation()
@@ -58,14 +57,12 @@ void UGSFAnimInstanceBase::OnGameplayEffectTagCountChanged_Event(const FGameplay
 
     const bool bTriggered = NewCount > 0;
 
-    if(Tag.MatchesTag(GSFGameplayTags::State::FallingTag))
+    if(Tag.MatchesTag(GEGameplayTags::State::FallingTag))
         bFalling = bTriggered;
-    else if(Tag.MatchesTag(GSFGameplayTags::State::CrouchingTag))
+    else if(Tag.MatchesTag(GEGameplayTags::State::CrouchingTag))
         bCrouching = bTriggered;
-    else if(Tag.MatchesTag(GSFGameplayTags::State::ADSTag))
+    else if(Tag.MatchesTag(GEGameplayTags::State::ADSTag))
         bADS = bTriggered;
-    else if(Tag.MatchesTag(GSFGameplayTags::State::DeadTag))
+    else if(Tag.MatchesTag(GEGameplayTags::State::DeadTag))
         bDead = bTriggered;
-    else if(Tag.MatchesTag(GSFGameplayTags::State::CombatTag))
-        bCombat = bTriggered;
 }

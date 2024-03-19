@@ -17,7 +17,7 @@
  */
 
 class UGEStateMachine;
-class UGSFEquipmentManager;
+class UGEEquipmentManager;
 class UGEAbilitySystemBase;
 
 UCLASS()
@@ -32,7 +32,7 @@ public:
 private:
     // 장비를 관리하기 위한 컴포넌트입니다.
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component", meta = (AllowPrivateAccess = "true"))
-    TObjectPtr<UGSFEquipmentManager> EquipmentManager;
+    TObjectPtr<UGEEquipmentManager> EquipmentManager;
 
     // GetBaseAimRotation에서 사용하기 위한 리플리케이트된 Yaw
     UPROPERTY(Replicated)
