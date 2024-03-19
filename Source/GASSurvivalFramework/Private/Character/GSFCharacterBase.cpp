@@ -3,7 +3,6 @@
 
 #include "Character/GSFCharacterBase.h"
 
-#include "Character/Components/GSFStateMachine.h"
 #include "Components/CapsuleComponent.h"
 #include "Equipment/Components/GSFEquipmentManager.h"
 #include "Net/UnrealNetwork.h"
@@ -11,7 +10,6 @@
 FName AGSFCharacterBase::EquipmentManagerName(TEXT("EquipmentManager"));
 
 AGSFCharacterBase::AGSFCharacterBase(const FObjectInitializer& ObjectInitializer)
-: Super(ObjectInitializer.SetDefaultSubobjectClass<UGSFStateMachine>(StateMachineName))
 {
     /* 서브 오브젝트 생성 */
     EquipmentManager = CreateDefaultSubobject<UGSFEquipmentManager>(EquipmentManagerName);
