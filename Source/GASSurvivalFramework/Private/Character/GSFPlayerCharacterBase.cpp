@@ -5,10 +5,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/Controller.h"
-#include "EnhancedInputComponent.h"
-#include "EnhancedInputSubsystems.h"
-#include "InputActionValue.h"
-#include "Character/Components/GSFSpringArmComponent.h"
+#include "Character/Components/GESpringArmComponent.h"
 
 FName AGSFPlayerCharacterBase::SpringArmComponentName(TEXT("CameraBoom"));
 FName AGSFPlayerCharacterBase::CameraComponentName(TEXT("FollowCamera"));
@@ -21,7 +18,7 @@ AGSFPlayerCharacterBase::AGSFPlayerCharacterBase(const FObjectInitializer& Objec
     bUseControllerRotationRoll = false;
 
     /* 서브 오브젝트 생성 및 할당 */
-    CameraBoom = CreateDefaultSubobject<UGSFSpringArmComponent>(SpringArmComponentName);
+    CameraBoom = CreateDefaultSubobject<UGESpringArmComponent>(SpringArmComponentName);
     CameraBoom->SetupAttachment(RootComponent);
 
     FollowCamera = CreateDefaultSubobject<UCameraComponent>(CameraComponentName);
